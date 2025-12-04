@@ -29,7 +29,7 @@ This repository contains my implementation of the **Cloud Resume Challenge** —
 ---
 
 ## 📂 Project Structure
-AWS Cloud Resume Challenge/
+'''AWS Cloud Resume Challenge/
 ├── Index.html                     # Frontend Resume Website
 └── cloud-resume-backend/
 ├── template.yaml              # SAM Infrastructure Template
@@ -37,7 +37,7 @@ AWS Cloud Resume Challenge/
 │   └── app.py
 ├── hello_world/               # Sample Lambda (optional)
 ├── events/
-
+'''
 ---
 
 ## 🚀 How it Works
