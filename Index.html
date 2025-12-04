@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Raviteja's Resume</title>
+</head>
+<body>
+  <h1>Raviteja's Resume</h1>
+
+  <p>This page has been visited <span id="visitor-count">0</span> times.</p>
+
+  <!-- Visitor Counter Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const counterEl = document.getElementById("visitor-count");
+      counterEl.innerText = "Loading...";
+
+      fetch("https://mr8j1pizod.execute-api.us-east-1.amazonaws.com/Prod/")
+        .then(response => {
+          if (!response.ok) throw new Error("Network response not ok");
+          return response.json();
+        })
+        .then(data => {
+          console.log("API response:", data);
+          // Handle both string or object body safely
+          let count;
+          if (data.body) {
+            try {
+              const bodyObj = typeof data.body === "string" ? JSON.parse(data.body) : data.body;
+              count = bodyObj.count;
+            } catch(e) {
+              console.error("Failed to parse API body:", e);
+              throw new Error("Failed to parse response body");
+            }
+          } else if (data.count !== undefined) {
+            count = data.count;
+          } else {
+            throw new Error("Count not found in response");
+          }
+          counterEl.innerText = count;
+        })
+        .catch(err => {
+          console.error("Fetch failed:", err);
+          counterEl.innerText = "Error";
+        });
+    });
+  </script>
+</body>
+</html>
